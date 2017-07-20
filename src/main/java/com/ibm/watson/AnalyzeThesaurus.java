@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -20,19 +19,14 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.DisjunctionMaxQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.Sort;
-import org.apache.lucene.search.TermQuery;
-import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.util.CollectionUtil;
-
 import com.ibm.watson.analyzers.ConceptNameAnalyzer;
 import com.ibm.watson.analyzers.LowerCaseAnalyzer;
 
@@ -40,14 +34,14 @@ public class AnalyzeThesaurus {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		String userHome = System.getProperty("user.home");
-		Path sourceDir = Paths.get(userHome, "Documents", "Curation", "thesaurus");
+		Paths.get(userHome, "Documents", "Curation", "thesaurus");
 		Path baseDir = Paths.get("/Users/singhv/Documents/Data/lucene_nci");
 		Path indexDir = baseDir.resolve("index");
 		
 		Directory directory = FSDirectory.open(indexDir);
 		DirectoryReader ireader = DirectoryReader.open(directory);
 		IndexSearcher isearcher = new IndexSearcher(ireader);
-		Pattern pattern = Pattern.compile("(<start> )(.*)( <end>)");
+		Pattern.compile("(<start> )(.*)( <end>)");
 
 		String queryStr = "moderately differentiated invasive ductal carcinoma";
 		List<String> split = QueryLucene.createTokens(queryStr, new LowerCaseAnalyzer());
@@ -156,12 +150,9 @@ public class AnalyzeThesaurus {
 	        	String[] fields = StringUtils.split(line, "\t");
 	            
 	            if (!("Retired_Concept").equals(fields[fields.length - 2])) {
-		            String nciCode = fields[0];
-		            String parentCode = fields[2];
 		            String[] synonymValues = fields[3].split("\\|");
 		            String conceptName = synonymValues[0];
 		            
-		            String semType = fields[fields.length - 1];	
 		            if (conceptName.endsWith("al") || conceptName.endsWith("an")) {
 		            	System.out.println(conceptName);
 		            }

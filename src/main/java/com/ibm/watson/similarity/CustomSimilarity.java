@@ -1,8 +1,6 @@
 package com.ibm.watson.similarity;
 
 import org.apache.lucene.index.FieldInvertState;
-import org.apache.lucene.search.similarities.BasicStats;
-import org.apache.lucene.search.similarities.SimilarityBase;
 import org.apache.lucene.search.similarities.TFIDFSimilarity;
 import org.apache.lucene.util.BytesRef;
 

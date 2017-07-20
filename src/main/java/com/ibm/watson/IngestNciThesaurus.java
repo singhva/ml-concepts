@@ -16,7 +16,6 @@ import org.apache.lucene.analysis.core.KeywordAnalyzer;
 import org.apache.lucene.analysis.miscellaneous.PerFieldAnalyzerWrapper;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.FieldType;
@@ -67,9 +66,6 @@ public class IngestNciThesaurus {
 	        for (String line = null; (line = br.readLine()) != null;) {
 	        	line = StringUtils.trim(line);
 	        	String[] fields = StringUtils.split(line, "\t");
-	            //String[] fields = {"", "", "", "", "", "", "", ""};
-	            //String[] temp = StringUtils.split(line, "\t");
-	            //System.arraycopy(temp, 0, fields, 0, temp.length);
 	            
 	            if (line.indexOf("Retired_Concept") == -1) {
 		            String nciCode = fields[0];
